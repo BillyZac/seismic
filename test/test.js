@@ -1,10 +1,12 @@
-// var code = require('../src/js') /* where should this point */
+var code = require('../src/js/main.js')
 var expect = require('chai').expect
 
-// Do I need the line in the html?
-
 describe('Earthquake app', function() {
-  it('whenever whatever happens', function() {
+  it('undefined equals undefined', function() {
     expect(undefined).to.be.undefined
+  })
+
+  it('sanity check', function() {
+    expect(code.sanityCheck(1,2)).to.equal(3)
   })
 })

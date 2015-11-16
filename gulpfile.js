@@ -1,5 +1,6 @@
 var gulp = require('gulp')
 var mocha = require('gulp-mocha')
+var webpack = require('gulp-webpack')
 
 gulp.task('default', ['build'])
 
@@ -18,7 +19,11 @@ gulp.task('build:html', function() {
 
 gulp.task('build:js', ['test'], function() {
   return gulp
-    .src('./src/**/*.js')
+    .src('./src/js/main.js')
+    .pipe(webpack(
+      { output: { filename: './js/main.js' },
+        devtool: '#source-map'
+      }))
     .pipe(gulp.dest('./build'))
 })
 
