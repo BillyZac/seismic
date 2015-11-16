@@ -1,7 +1,13 @@
 var gulp = require('gulp')
+var mocha = require('gulp-mocha')
 
-gulp.task('default', function() {
+gulp.task('default', ['test'], function() {
   gulp
     .src('./src/**/*.html')
     .pipe(gulp.dest('./build'))
+})
+
+gulp.task('test', function() {
+  return gulp.src('./test/*.js', {read: false})
+    .pipe(mocha())
 })
