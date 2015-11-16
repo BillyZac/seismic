@@ -26,3 +26,10 @@ gulp.task('build css', function() {
     .src('./src/**/*.css')
     .pipe(gulp.dest('./build'))
 })
+
+gulp.task('watch', ['default'], function () {
+    gulp.watch('./src/**/*.html', ['default'])
+    gulp.watch('./src/**/*.css', ['default'])
+    gulp.watch('./src/**/*.js', ['default'])
+    gulp.watch('./test/*.js', ['test'])
+})
