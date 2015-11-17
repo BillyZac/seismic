@@ -14,6 +14,7 @@
   "devDependencies": {
     "chai": "*",
     "gh-pages": "^0.5.0",
+    "gulp": "^3.9.0",
     "gulp-mocha": "^2.2.0",
     "gulp-webpack": "^1.5.0",
     "mocha": "*"
