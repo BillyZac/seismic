@@ -57,10 +57,11 @@
 	  $.get(url)
 	    .done(function(data) {
 	      var quakes = data.features
-	      for (var i=0; i<quakes.length; i++) {
+	      for (var i=0; i<5; i++) {
 	        console.log(data.features[i].properties.title)
+	        var title = data.features[i].properties.title
+	        $('.map').append('<p>' + title + '</p>' )
 	      }
-	      $('.map').text(data.features[0].properties.title)
 	    })
 	}
 	connect(url)
