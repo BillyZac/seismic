@@ -6,6 +6,7 @@ header {
   background: #444;
   color: white;
   margin: 0;
+  height: 40px;
 }
 
 header h1 {
@@ -22,11 +23,21 @@ main {
 }
 
 .info {
-  border: 1px dashed #eee;
-  left: 5px;
+  background-color: #222;
+  color: white;
+  left: 0px;
   top: 40px;
   position: fixed;
-  width: 200px;
+  width: 250px;
+  padding: 10px;
+  height: 100%;
+
+  h3 {
+    border-bottom: 1px solid #333;
+  }
+  p {
+    height: 50px;
+  }
 }
 
 .map {
