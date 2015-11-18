@@ -17,8 +17,16 @@ main {
   margin: 0 auto;
 }
 
-.slider, .info {
+.slider {
   display: none;
+}
+
+.info {
+  border: 1px dashed #eee;
+  left: 5px;
+  top: 40px;
+  position: fixed;
+  width: 200px;
 }
 
 .map {
