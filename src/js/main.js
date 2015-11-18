@@ -20,18 +20,19 @@ function connect(url) {
 }
 // connect(url)
 
-drawCircle()
+drawCircle(130, 100, 30)
+drawCircle(130, 75, 50)
 
-function drawCircle() {
-  var $svg = $('#mysvg');
+function drawCircle(x, y, r) {
+  var $svg = $('.map');
   $(SVG('circle'))
-    .attr('cx', 130)
-    .attr('cy', 75)
-    .attr('r', 50)
+    .attr('cx', x)
+    .attr('cy', y)
+    .attr('r', r)
     .attr('fill', 'none')
-    .attr('stroke', 'red')
-    .attr('stroke-width', 3)
-    .appendTo($svg);
+    .attr('stroke', 'aqua')
+    .attr('stroke-width', 1)
+    .appendTo($svg)
 }
 
 function SVG(tag) {
