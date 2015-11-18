@@ -2,8 +2,9 @@ var $ = require('jquery')
 var gulp = require('gulp')
 var mocha = require('gulp-mocha')
 var webpack = require('gulp-webpack')
-var ghpages = require('gh-pages');
-var path = require('path');
+var ghpages = require('gh-pages')
+var path = require('path')
+var browserSync = require('browser-sync').create()
 
 gulp.task('default', ['build'])
 
@@ -48,4 +49,13 @@ gulp.task('gh-pages', function() {
     if (!err) { console.log('Successfully deployed at http://billyzac.github.io/seismic/!')}
     else { console.log('Error:', err) }
   });
+})
+
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./build/"
+        }
+    })
+    gulp.watch("./build/**/*").on('change', browserSync.reload)
 })
