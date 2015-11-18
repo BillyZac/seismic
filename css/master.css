@@ -6,12 +6,14 @@ body {
 header {
   background: #222;
   color: white;
-  margin: 0;
   height: 40px;
   width: 250px;
-  padding: 10px; }
+  padding: 10px 0 0 0 10px;
+  position: fixed;
+  left: 0;
+  top: 0; }
   header h1 {
-    padding: 0;
+    padding: 10px;
     margin: 0;
     font-size: 1.1rem;
     text-transform: lowercase;
@@ -30,9 +32,9 @@ main {
   left: 0px;
   top: 40px;
   position: fixed;
-  width: 250px;
-  padding: 10px;
-  height: 100%; }
+  width: 240px;
+  padding-left: 10px;
+  height: 555px; }
   .info h3 {
     border-bottom: 1px solid #293838;
     color: #B9F9F9;
@@ -43,8 +45,11 @@ main {
     height: 50px; }
 
 .map {
-  width: 100%;
-  height: 1000px; }
+  width: 1190px;
+  height: 595px;
+  background-image: url(../images/global-map.png);
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 circle {
   transition: fill 0.2s ease; }
