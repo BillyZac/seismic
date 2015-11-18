@@ -11,26 +11,33 @@ function connect(url) {
   $.get(url)
     .done(function(data) {
       var quakes = data.features
-      for (var i=0; i<5; i++) {
-        console.log(data.features[i].properties.title)
-        var title = data.features[i].properties.title
-        $('.map').append('<p>' + title + '</p>' )
+      for (var i=0; i<quakes.length; i++) {
+        var title = quakes[i].properties.title
+        // $('body').append('<p>' + title + '</p>' )
+        var dataPoint = {
+          x: quakes[i].geometry.coordinates[0] * 8,
+          y: quakes[i].geometry.coordinates[1] * 8,
+          radius: quakes[i].properties.sig * 0.07,
+          mag: quakes[i].properties.mag
+        }
+        if (dataPoint.mag > 4) {
+          console.log(dataPoint)
+          drawCircle(dataPoint)
+        }
       }
     })
 }
-// connect(url)
+connect(url)
 
-drawCircle(130, 100, 30)
-drawCircle(130, 75, 50)
-
-function drawCircle(x, y, r) {
+function drawCircle(dataPoint) {
   var $svg = $('.map');
   $(SVG('circle'))
-    .attr('cx', x)
-    .attr('cy', y)
-    .attr('r', r)
-    .attr('fill', 'none')
-    .attr('stroke', 'aqua')
+    .attr('cx', dataPoint.x)
+    .attr('cy', dataPoint.y)
+    .attr('r', dataPoint.radius)
+    .attr('fill', 'aqua')
+    .attr('stroke', 'none')
+    .attr('opacity', 0.2)
     .attr('stroke-width', 1)
     .appendTo($svg)
 }

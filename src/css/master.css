@@ -22,6 +22,7 @@ main {
 }
 
 .map {
-  width: 400px;
-  height: 400px;
+  width: 1000px;
+  height: 600px;
+  border: 5px dashed #eee;
 }
