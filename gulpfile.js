@@ -5,10 +5,11 @@ var webpack = require('gulp-webpack')
 var ghpages = require('gh-pages')
 var path = require('path')
 var browserSync = require('browser-sync').create()
+var sass = require('gulp-sass')
 
 gulp.task('default', ['build'])
 
-gulp.task('build', ['build:html', 'build:js', 'build:css'])
+gulp.task('build', ['build:html', 'build:js', 'sass'])
 
 gulp.task('test', function() {
   // return gulp.src('./test/*.js', {read: false})
@@ -31,15 +32,15 @@ gulp.task('build:js', ['test'], function() {
     .pipe(gulp.dest('./build'))
 })
 
-gulp.task('build:css', function() {
-  return gulp
-    .src('./src/**/*.css')
-    .pipe(gulp.dest('./build'))
-})
+// gulp.task('build:css', function() {
+//   return gulp
+//     .src('./src/**/*.css')
+//     .pipe(gulp.dest('./build'))
+// })
 
 gulp.task('watch', ['default'], function () {
     gulp.watch('./src/**/*.html', ['build:html'])
-    gulp.watch('./src/**/*.css', ['build:css'])
+    gulp.watch('./src/sass/*.scss', ['sass'])
     gulp.watch('./src/**/*.js', ['build:js'])
     gulp.watch('./test/*.js', ['test'])
 })
@@ -58,4 +59,10 @@ gulp.task('browser-sync', function() {
         }
     })
     gulp.watch("./build/**/*").on('change', browserSync.reload)
+})
+
+gulp.task('sass', function () {
+  gulp.src('./src/sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./build/css'))
 })
