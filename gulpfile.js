@@ -9,7 +9,7 @@ var sass = require('gulp-sass')
 
 gulp.task('default', ['build'])
 
-gulp.task('build', ['build:html', 'build:js', 'sass'])
+gulp.task('build', ['build:html', 'build:js', 'build:images', 'sass'])
 
 gulp.task('test', function() {
   // return gulp.src('./test/*.js', {read: false})
@@ -30,6 +30,12 @@ gulp.task('build:js', ['test'], function() {
         devtool: '#source-map'
       }))
     .pipe(gulp.dest('./build'))
+})
+
+gulp.task('build:images', function() {
+  return gulp
+    .src('./src/images/*.png')
+    .pipe(gulp.dest('./build/images/'))
 })
 
 // gulp.task('build:css', function() {
