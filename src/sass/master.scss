@@ -1,9 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300,300italic);
+
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 header {
-  background: #444;
+  background: #222;
   color: white;
   margin: 0;
   height: 40px;
@@ -13,9 +16,10 @@ header {
   h1 {
     padding: 0;
     margin: 0;
-    font-size: 1rem;
-    text-transform: uppercase;
+    font-size: 1.1rem;
+    text-transform: lowercase;
     letter-spacing: 0.3rem;
+    font-weight: 100;
   }
 }
 
@@ -27,7 +31,7 @@ main {
 }
 
 .info {
-  background-color: #222;
+  background-color: #333;
   color: white;
   left: 0px;
   top: 40px;
@@ -37,7 +41,11 @@ main {
   height: 100%;
 
   h3 {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #293838;
+    color: #B9F9F9;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 0.05rem;
   }
   p {
     height: 50px;
