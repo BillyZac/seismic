@@ -57,6 +57,7 @@
 	  $.get(url)
 	    .done(function(data) {
 	      var quakes = data.features
+	      // console.log(quakes)
 	      for (var i=0; i<quakes.length; i++) {
 	        var title = quakes[i].properties.title
 	        // $('body').append('<p>' + title + '</p>' )
@@ -64,13 +65,22 @@
 	          x: quakes[i].geometry.coordinates[0] * 8,
 	          y: quakes[i].geometry.coordinates[1] * 8,
 	          radius: quakes[i].properties.sig * 0.07,
-	          mag: quakes[i].properties.mag
+	          mag: quakes[i].properties.mag,
+	          place: quakes[i].properties.place,
+	          time: quakes[i].properties.time
 	        }
-	        if (dataPoint.mag > 4) {
-	          console.log(dataPoint)
+	        if (dataPoint.mag > 5) {
+	          // console.log(dataPoint)
 	          drawCircle(dataPoint)
 	        }
 	      }
+	      // Listen for hover over circles. Show more info about the event when hovering.
+	      $( "circle[data-type='point']" ).hover( function() {
+	        $mag = $(this).attr('data-mag')
+	        $('.mag').text($mag)
+	        $place = $(this).attr('data-place')
+	        $('.place').text($place)
+	      })
 	    })
 	}
 	connect(url)
@@ -84,7 +94,10 @@
 	    .attr('fill', 'aqua')
 	    .attr('stroke', 'none')
 	    .attr('opacity', 0.2)
-	    .attr('stroke-width', 1)
+	    .attr('stroke-width', 3)
+	    .attr('data-type', 'point')
+	    .attr('data-mag', dataPoint.mag)
+	    .attr('data-place', dataPoint.place)
 	    .appendTo($svg)
 	}
 	
