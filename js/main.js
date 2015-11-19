@@ -46,6 +46,10 @@
 
 	var $ = __webpack_require__(1)
 	
+	// The size of the global map image
+	var mapWidth    = 1190
+	var mapHeight   = 595
+	
 	function sanityCheck(a, b) {
 	  // console.log(a, b)
 	  return a + b
@@ -62,15 +66,19 @@
 	        var title = quakes[i].properties.title
 	        // $('body').append('<p>' + title + '</p>' )
 	        var dataPoint = {
-	          x: quakes[i].geometry.coordinates[0] * 8,
-	          y: quakes[i].geometry.coordinates[1] * 8,
+	          latitude: quakes[i].geometry.coordinates[1],
+	          longitude: quakes[i].geometry.coordinates[0],
 	          radius: quakes[i].properties.sig * 0.07,
 	          mag: quakes[i].properties.mag,
 	          place: quakes[i].properties.place,
 	          time: quakes[i].properties.time
 	        }
+	
+	        // Convert map coordinates to screen coordinates
+	        dataPoint.x =  Math.floor(convertLongitude(dataPoint.longitude))
+	        dataPoint.y =  Math.floor(convertLatitude(dataPoint.latitude))
+	
 	        if (dataPoint.mag > 5) {
-	          // console.log(dataPoint)
 	          drawCircle(dataPoint)
 	        }
 	      }
@@ -103,6 +111,21 @@
 	
 	function SVG(tag) {
 	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
+	}
+	
+	function convertLongitude(longitude) {
+	  var x = ( longitude + 180 ) * ( mapWidth / 360 )
+	  return x
+	}
+	
+	function convertLatitude(latitude) {
+	  // convert from degrees to radians
+	  var latRad = latitude * Math.PI / 180
+	
+	  var mercN = Math.log(Math.tan((Math.PI/4)+(latRad/2)))
+	  var y     = (mapHeight/2)-(mapWidth*mercN/(2*Math.PI))
+	
+	  return y
 	}
 	
 	module.exports.sanityCheck = sanityCheck
