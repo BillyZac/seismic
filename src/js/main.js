@@ -1,4 +1,5 @@
 var $ = require('jquery')
+var render = require('./renderStuff.js')
 
 // The size of the global map image
 var mapWidth    = 1190
@@ -10,12 +11,16 @@ function sanityCheck(a, b) {
 }
 sanityCheck(1,2)
 
-var url = 'http://XXXearthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
+var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
 function connect(url) {
   $.get(url)
     .done(function(data) {
       var quakes = data.features
-      // console.log(quakes)
+      var quakesCollection = {
+        timeCollected: 0,
+        list: []
+      }
+
       for (var i=0; i<quakes.length; i++) {
         var title = quakes[i].properties.title
         // $('body').append('<p>' + title + '</p>' )
@@ -32,10 +37,15 @@ function connect(url) {
         dataPoint.x =  Math.floor(convertLongitude(dataPoint.longitude))
         dataPoint.y =  Math.floor(convertLatitude(dataPoint.latitude))
 
-        if (dataPoint.mag > 5) {
-          drawCircle(dataPoint)
-        }
+        // Put the quake in the quakesCollection
+        quakesCollection.list.push(dataPoint)
       }
+
+      // Set the maximum magnitude of quakes to draw
+      var maxMagnitude = 5.5
+      // Draw all quakes above the specified magnitude
+      render.drawAll(quakesCollection, maxMagnitude)
+
       // Listen for hover over circles. Show more info about the event when hovering.
       $( "circle[data-type='point']" ).hover( function() {
         $mag = $(this).attr('data-mag')
@@ -44,28 +54,13 @@ function connect(url) {
         $('.place').text($place)
       })
     })
+    .error(function() {
+      console.log('Could not connect to USGS.')
+    })
 }
 connect(url)
 
-function drawCircle(dataPoint) {
-  var $svg = $('.map');
-  $(SVG('circle'))
-    .attr('cx', dataPoint.x)
-    .attr('cy', dataPoint.y)
-    .attr('r', dataPoint.radius)
-    .attr('fill', 'aqua')
-    .attr('stroke', 'none')
-    .attr('opacity', 0.2)
-    .attr('stroke-width', 3)
-    .attr('data-type', 'point')
-    .attr('data-mag', dataPoint.mag)
-    .attr('data-place', dataPoint.place)
-    .appendTo($svg)
-}
-
-function SVG(tag) {
-   return document.createElementNS('http://www.w3.org/2000/svg', tag);
-}
+// render.drawAll()
 
 function convertLongitude(longitude) {
   var x = ( longitude + 180 ) * ( mapWidth / 360 )
@@ -84,4 +79,3 @@ function convertLatitude(latitude) {
 
 module.exports.sanityCheck = sanityCheck
 module.exports.connect = connect
-module.exports.drawSomething = drawCircle
