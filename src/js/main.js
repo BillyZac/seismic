@@ -10,7 +10,7 @@ function sanityCheck(a, b) {
 }
 sanityCheck(1,2)
 
-var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
+var url = 'http://XXXearthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
 function connect(url) {
   $.get(url)
     .done(function(data) {
