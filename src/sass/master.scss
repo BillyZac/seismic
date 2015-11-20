@@ -11,7 +11,7 @@ header {
   // margin: 0;
   height: 40px;
   width: 250px;
-  padding: 10px 0 0 0 10px;
+  padding: 0 10px;
   position: fixed;
   left: 0;
   top: 0;
@@ -56,13 +56,17 @@ main {
     padding-top: 30px;
   }
   p {
-    height: 50px;
+    height: 45px;
     padding: 0;
     padding-top: 5px;
     margin: 0;
   }
   .date {
     height: 17px;
+  }
+  .time {
+    font-size: 0.8rem;
+    color: #ccc;
   }
 }
 

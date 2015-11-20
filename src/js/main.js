@@ -95,13 +95,6 @@ function connect(url) {
         $('.date').text( new Date($time).toLocaleDateString())
         $('.time').text( new Date($time).toLocaleTimeString())
       })
-
-      $('circle').click(function() {
-        // When circle is clicked, show photos
-        photos.photos(-40, 120)
-
-      })
-
     })
 }
 connect(url)
