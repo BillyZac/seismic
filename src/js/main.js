@@ -40,8 +40,6 @@ function connect(url) {
       // Timestamp the quakesCollection
       quakesCollection.timeCollected = new Date()
       var quakes = data.features
-      console.log(quakes)
-      console.log('quakes', quakes.length)
       for (var i=0; i<quakes.length; i++) {
         var title = quakes[i].properties.title
         // $('body').append('<p>' + title + '</p>' )
@@ -97,12 +95,16 @@ function connect(url) {
         $('.date').text( new Date($time).toLocaleDateString())
         $('.time').text( new Date($time).toLocaleTimeString())
       })
+
+      $('circle').click( function() {
+        photos.clearPhotos()
+        photos.photos($(this).attr('latitude'), $(this).attr('longitude'))
+      })
     })
 }
 connect(url)
 
 $('body').mousemove(function(event) {
-  console.log(event.pageY)
   if (event.pageY < 20) {
     $('header').slideDown(50)
   }

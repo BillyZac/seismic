@@ -18,6 +18,8 @@ function drawCircle(dataPoint) {
   $(SVG('circle'))
     .attr('cx', dataPoint.x)
     .attr('cy', dataPoint.y)
+    .attr('latitude', dataPoint.latitude)
+    .attr('longitude', dataPoint.longitude)
     .attr('r', dataPoint.radius)
     .attr('fill', 'aqua')
     .attr('stroke', 'none')
