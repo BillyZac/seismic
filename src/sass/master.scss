@@ -59,7 +59,7 @@ main {
     padding-top: 30px;
   }
   p {
-    height: 45px;
+    height: 37px;
     padding: 0;
     padding-top: 5px;
     margin: 0;
@@ -70,6 +70,7 @@ main {
   .time {
     font-size: 0.8rem;
     color: #ccc;
+    height: 12px;
   }
 }
 
@@ -99,8 +100,8 @@ circle:hover {
   // border: 1px dashed tomato;
   img {
     // background-color: #222;
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     padding: 3px;
     border-radius: 50%;
   }
