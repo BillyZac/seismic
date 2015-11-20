@@ -11,7 +11,10 @@ function sanityCheck(a, b) {
 }
 sanityCheck(1,2)
 
-var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
+
+var queryMinMagnitude = 3
+var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude='
+  + queryMinMagnitude
 function connect(url) {
   var quakesCollection = {
     timeCollected: 'never',
@@ -29,11 +32,13 @@ function connect(url) {
 
   $.get(url)
     .done(function(data) {
+      // Clear the list of quakes
+      quakesCollection.list = []
       console.log('Successfully connected')
       // Timestamp the quakesCollection
       quakesCollection.timeCollected = new Date()
-      console.log('Newly created time stamp:', quakesCollection.timeCollected)
       var quakes = data.features
+      console.log('quakes', quakes.length)
       for (var i=0; i<quakes.length; i++) {
         var title = quakes[i].properties.title
         // $('body').append('<p>' + title + '</p>' )
@@ -52,8 +57,7 @@ function connect(url) {
         quakesCollection.list.push(dataPoint)
       }
       localStorage.clear()
-      // localStorage.setItem('quakesCollection', JSON.stringify(quakesCollection))
-
+      localStorage.setItem('quakesCollection', JSON.stringify(quakesCollection))
     })
     .error(function() {
       console.log('Could not connect to USGS.')
@@ -75,7 +79,7 @@ function connect(url) {
         $('.notifications').text('Data collected at ' + quakesCollection.timeCollected.toLocaleString())
       }
       // Set the maximum magnitude of quakes to draw
-      var maxMagnitude = 6.0
+      var maxMagnitude = 5.5
       // Draw all quakes above the specified magnitude
       render.drawAll(quakesCollection, maxMagnitude)
 
@@ -89,8 +93,6 @@ function connect(url) {
     })
 }
 connect(url)
-
-// render.drawAll()
 
 function convertLongitude(longitude) {
   var x = ( longitude + 180 ) * ( mapWidth / 360 )
