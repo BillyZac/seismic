@@ -67,11 +67,6 @@ function connect(url) {
       }
     })
     .always(function(APIresponse) {
-      for (var i=0; i<12; i++) {
-        photos.photos(i)
-      }
-
-
       // Show notification if cannot connect to API
       if (APIresponse.statusText === 'error') {
         if (quakesCollection.timeCollected === 'never') {
@@ -99,6 +94,13 @@ function connect(url) {
         var friendlyTime = $time
         $('.time').text(friendlyTime)
       })
+
+      $('circle').click(function() {
+        // When circle is clicked, show photos
+        photos.photos($(this).attr('data-time'))
+
+      })
+
     })
 }
 connect(url)
