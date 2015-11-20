@@ -1,5 +1,6 @@
 var $ = require('jquery')
 var render = require('./renderStuff.js')
+var photos = require('./photos.js')
 
 // The size of the global map image
 var mapWidth    = 1190
@@ -66,6 +67,11 @@ function connect(url) {
       }
     })
     .always(function(APIresponse) {
+      for (var i=0; i<12; i++) {
+        photos.photos(i)
+      }
+
+
       // Show notification if cannot connect to API
       if (APIresponse.statusText === 'error') {
         if (quakesCollection.timeCollected === 'never') {
