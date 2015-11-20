@@ -47,7 +47,7 @@ main {
     margin: 0;
     padding-top: 30px; }
   .info p {
-    height: 45px;
+    height: 37px;
     padding: 0;
     padding-top: 5px;
     margin: 0; }
@@ -55,7 +55,8 @@ main {
     height: 17px; }
   .info .time {
     font-size: 0.8rem;
-    color: #ccc; }
+    color: #ccc;
+    height: 12px; }
 
 .map {
   width: 1190px;
@@ -77,6 +78,14 @@ circle:hover {
   position: absolute; }
 
 .photos img {
-  background-color: #222;
-  width: 50px;
-  height: 50px; }
+  width: 65px;
+  height: 65px;
+  padding: 3px;
+  border-radius: 50%; }
+
+.photos ul {
+  list-style-type: none;
+  padding: 0; }
+
+.photos li {
+  display: inline-block; }
