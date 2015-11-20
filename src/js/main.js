@@ -48,7 +48,7 @@ function connect(url) {
         var dataPoint = {
           latitude: quakes[i].geometry.coordinates[1],
           longitude: quakes[i].geometry.coordinates[0],
-          radius: quakes[i].properties.sig * 0.03,
+          radius: quakes[i].properties.sig * 0.07,
           mag: quakes[i].properties.mag,
           place: quakes[i].properties.place,
           time: new Date(quakes[i].properties.time)
@@ -83,7 +83,7 @@ function connect(url) {
         $('.notifications').text('Data collected at ' + quakesCollection.timeCollected.toLocaleString())
       }
       // Set the maximum magnitude of quakes to draw
-      var maxMagnitude = 3
+      var maxMagnitude = 5.5
       // Draw all quakes above the specified magnitude
       render.drawAll(quakesCollection, maxMagnitude)
 
