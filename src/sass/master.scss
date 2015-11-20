@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  background: #000;
 }
 
 header {
@@ -36,12 +37,14 @@ main {
 .info {
   background-color: #333;
   color: white;
-  left: 0px;
-  top: 40px;
+  left: 0;
+  top: 0;
   position: fixed;
   width: 240px;
   padding-left: 10px;
+  padding-top: 40px;
   height: 555px;
+  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75);
 
   h3 {
     border-bottom: 1px solid #293838;
