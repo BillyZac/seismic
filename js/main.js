@@ -45,6 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(1)
+	var render = __webpack_require__(2)
 	
 	// The size of the global map image
 	var mapWidth    = 1190
@@ -57,11 +58,32 @@
 	sanityCheck(1,2)
 	
 	var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
+	  + '&minmagnitude=3' // This filters out about 90% of the events, which are not useful for this visualization anyway
+	  + '&orderby=time-asc' // Allows us to easily animate the display
 	function connect(url) {
+	  var quakesCollection = {
+	    timeCollected: 'never',
+	    list: []
+	  }
+	
+	  if (localStorage.getItem('quakesCollection')) {
+	    // Get the quakesCollection that was stored in the browser's localStorage on a previous page load
+	    quakesCollection = JSON.parse(localStorage.getItem('quakesCollection'))
+	    // Get the timestamp of the cached data, and convert it to a Date object
+	    var cachedTimeCollected = new Date(quakesCollection.timeCollected)
+	    // Update with quakesCollection object with the timestamp of the cached data
+	    quakesCollection.timeCollected = cachedTimeCollected
+	  }
+	
 	  $.get(url)
 	    .done(function(data) {
+	      // Clear the list of quakes
+	      quakesCollection.list = []
+	      console.log('Successfully connected')
+	      // Timestamp the quakesCollection
+	      quakesCollection.timeCollected = new Date()
 	      var quakes = data.features
-	      // console.log(quakes)
+	      console.log('quakes', quakes.length)
 	      for (var i=0; i<quakes.length; i++) {
 	        var title = quakes[i].properties.title
 	        // $('body').append('<p>' + title + '</p>' )
@@ -73,15 +95,39 @@
 	          place: quakes[i].properties.place,
 	          time: quakes[i].properties.time
 	        }
-	
 	        // Convert map coordinates to screen coordinates
 	        dataPoint.x =  Math.floor(convertLongitude(dataPoint.longitude))
 	        dataPoint.y =  Math.floor(convertLatitude(dataPoint.latitude))
-	
-	        if (dataPoint.mag > 5) {
-	          drawCircle(dataPoint)
-	        }
+	        // Put the quake in the quakesCollection
+	        quakesCollection.list.push(dataPoint)
 	      }
+	      localStorage.clear()
+	      localStorage.setItem('quakesCollection', JSON.stringify(quakesCollection))
+	    })
+	    .error(function() {
+	      console.log('Could not connect to USGS.')
+	      if (localStorage.getItem('quakesCollection')) {
+	        quakesCollection = JSON.parse(localStorage.getItem('quakesCollection'))
+	      }
+	    })
+	    .always(function(APIresponse) {
+	      // Show notification if cannot connect to API
+	      if (APIresponse.statusText === 'error') {
+	        if (quakesCollection.timeCollected === 'never') {
+	          $('.notifications').text('Could not connect to USGS.')
+	        } else {
+	          var cachedTimeCollected = new Date(quakesCollection.timeCollected)
+	          $('.notifications').text('Could not connect to USGS. Data last collected at '
+	          + cachedTimeCollected.toLocaleString())
+	        }
+	      } else {
+	        $('.notifications').text('Data collected at ' + quakesCollection.timeCollected.toLocaleString())
+	      }
+	      // Set the maximum magnitude of quakes to draw
+	      var maxMagnitude = 5.5
+	      // Draw all quakes above the specified magnitude
+	      render.drawAll(quakesCollection, maxMagnitude)
+	
 	      // Listen for hover over circles. Show more info about the event when hovering.
 	      $( "circle[data-type='point']" ).hover( function() {
 	        $mag = $(this).attr('data-mag')
@@ -92,26 +138,6 @@
 	    })
 	}
 	connect(url)
-	
-	function drawCircle(dataPoint) {
-	  var $svg = $('.map');
-	  $(SVG('circle'))
-	    .attr('cx', dataPoint.x)
-	    .attr('cy', dataPoint.y)
-	    .attr('r', dataPoint.radius)
-	    .attr('fill', 'aqua')
-	    .attr('stroke', 'none')
-	    .attr('opacity', 0.2)
-	    .attr('stroke-width', 3)
-	    .attr('data-type', 'point')
-	    .attr('data-mag', dataPoint.mag)
-	    .attr('data-place', dataPoint.place)
-	    .appendTo($svg)
-	}
-	
-	function SVG(tag) {
-	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
-	}
 	
 	function convertLongitude(longitude) {
 	  var x = ( longitude + 180 ) * ( mapWidth / 360 )
@@ -130,7 +156,6 @@
 	
 	module.exports.sanityCheck = sanityCheck
 	module.exports.connect = connect
-	module.exports.drawSomething = drawCircle
 
 
 /***/ },
@@ -9347,6 +9372,47 @@
 	return jQuery;
 	
 	}));
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1)
+	
+	// Takes quakesCollection object and draws all quakes above a specified magnitude
+	function drawAll(quakesCollection, maxMagnitude) {
+	  for (var i=0; i<quakesCollection.list.length; i++) {
+	    if (quakesCollection.list[i].mag > maxMagnitude) {
+	      drawCircle(quakesCollection.list[i])
+	    }
+	  }
+	}
+	
+	function SVG(tag) {
+	   return document.createElementNS('http://www.w3.org/2000/svg', tag);
+	}
+	
+	function drawCircle(dataPoint) {
+	  var $svg = $('.map');
+	  $(SVG('circle'))
+	    .attr('cx', dataPoint.x)
+	    .attr('cy', dataPoint.y)
+	    .attr('r', dataPoint.radius)
+	    .attr('fill', 'aqua')
+	    .attr('stroke', 'none')
+	    .attr('opacity', 0.2)
+	    .attr('stroke-width', 3)
+	    .attr('data-type', 'point')
+	    .attr('data-mag', dataPoint.mag)
+	    .attr('data-place', dataPoint.place)
+	    .appendTo($svg)
+	  // console.log(dataPoint)
+	}
+	
+	
+	module.exports.drawAll = drawAll
+	module.exports.drawCircle = drawCircle
 
 
 /***/ }
