@@ -11,10 +11,9 @@ function sanityCheck(a, b) {
 }
 sanityCheck(1,2)
 
-
-var queryMinMagnitude = 3
-var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude='
-  + queryMinMagnitude
+var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
+  + '&minmagnitude=3' // This filters out about 90% of the events, which are not useful for this visualization anyway
+  + '&orderby=time-asc' // Allows us to easily animate the display
 function connect(url) {
   var quakesCollection = {
     timeCollected: 'never',
