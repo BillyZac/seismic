@@ -46,6 +46,7 @@
 
 	var $ = __webpack_require__(1)
 	var render = __webpack_require__(2)
+	var photos = __webpack_require__(3)
 	
 	// The size of the global map image
 	var mapWidth    = 1190
@@ -56,6 +57,8 @@
 	  return a + b
 	}
 	sanityCheck(1,2)
+	
+	$('header').hide()
 	
 	var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
 	  + '&minmagnitude=3' // This filters out about 90% of the events, which are not useful for this visualization anyway
@@ -83,6 +86,7 @@
 	      // Timestamp the quakesCollection
 	      quakesCollection.timeCollected = new Date()
 	      var quakes = data.features
+	      console.log(quakes)
 	      console.log('quakes', quakes.length)
 	      for (var i=0; i<quakes.length; i++) {
 	        var title = quakes[i].properties.title
@@ -93,7 +97,7 @@
 	          radius: quakes[i].properties.sig * 0.07,
 	          mag: quakes[i].properties.mag,
 	          place: quakes[i].properties.place,
-	          time: quakes[i].properties.time
+	          time: new Date(quakes[i].properties.time)
 	        }
 	        // Convert map coordinates to screen coordinates
 	        dataPoint.x =  Math.floor(convertLongitude(dataPoint.longitude))
@@ -108,6 +112,7 @@
 	      console.log('Could not connect to USGS.')
 	      if (localStorage.getItem('quakesCollection')) {
 	        quakesCollection = JSON.parse(localStorage.getItem('quakesCollection'))
+	        console.log(quakesCollection)
 	      }
 	    })
 	    .always(function(APIresponse) {
@@ -134,10 +139,23 @@
 	        $('.mag').text($mag)
 	        $place = $(this).attr('data-place')
 	        $('.place').text($place)
+	        $time = $(this).attr('data-time')
+	        $('.date').text( new Date($time).toLocaleDateString())
+	        $('.time').text( new Date($time).toLocaleTimeString())
 	      })
 	    })
 	}
 	connect(url)
+	
+	$('body').mousemove(function(event) {
+	  console.log(event.pageY)
+	  if (event.pageY < 20) {
+	    $('header').slideDown(50)
+	  }
+	  if (event.pageY > 70) {
+	    $('header').slideUp(50)
+	  }
+	})
 	
 	function convertLongitude(longitude) {
 	  var x = ( longitude + 180 ) * ( mapWidth / 360 )
@@ -9406,13 +9424,36 @@
 	    .attr('data-type', 'point')
 	    .attr('data-mag', dataPoint.mag)
 	    .attr('data-place', dataPoint.place)
+	    .attr('data-time', dataPoint.time)
 	    .appendTo($svg)
 	  // console.log(dataPoint)
 	}
 	
-	
 	module.exports.drawAll = drawAll
 	module.exports.drawCircle = drawCircle
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1)
+	
+	function photos(latitude, longitude) {
+	  // get photos associated with the latitude and longitude
+	    // Put lat and long into a flickr search
+	    // Receive a list of photos
+	    // Push up to 12 photo urls into an array photoCollection
+	    // Append photos to sidebar
+	  $('.photos').html('')
+	  var photoCollection = ['url1', 'url2', 'url3']
+	  for (var i=0; i<photoCollection.length; i++) {
+	    var newImage = '<img src="' + photoCollection[i] + '"></img>'
+	    $('.photos').append(newImage)
+	  }
+	}
+	
+	module.exports.photos = photos
 
 
 /***/ }

@@ -1,16 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300,300italic);
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  background: #000; }
 
 header {
-  background: #222;
+  background: rgba(51, 51, 51, 0.8);
   color: white;
   height: 40px;
-  width: 250px;
-  padding: 10px 0 0 0 10px;
+  width: 100%;
   position: fixed;
-  left: 0;
   top: 0; }
   header h1 {
     padding: 10px;
@@ -29,20 +28,34 @@ main {
 .info {
   background-color: #333;
   color: white;
-  left: 0px;
-  top: 40px;
+  left: 0;
+  top: 0;
   position: fixed;
   width: 240px;
   padding-left: 10px;
-  height: 555px; }
+  padding-top: 40px;
+  height: 555px;
+  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75); }
   .info h3 {
     border-bottom: 1px solid #293838;
     color: #B9F9F9;
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 0.05rem; }
+  .info h3 {
+    padding: 0;
+    margin: 0;
+    padding-top: 30px; }
   .info p {
-    height: 50px; }
+    height: 45px;
+    padding: 0;
+    padding-top: 5px;
+    margin: 0; }
+  .info .date {
+    height: 17px; }
+  .info .time {
+    font-size: 0.8rem;
+    color: #ccc; }
 
 .map {
   width: 1190px;
@@ -62,3 +75,8 @@ circle:hover {
   color: #888;
   bottom: 5px;
   position: absolute; }
+
+.photos img {
+  background-color: #222;
+  width: 50px;
+  height: 50px; }
