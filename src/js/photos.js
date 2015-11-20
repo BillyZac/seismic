@@ -31,7 +31,7 @@ function photos(latitude, longitude) {
 
           photoHTML += '<li><a href="'
             + '#'
-            + '/>'
+            + '">'
             + '<img src="'
             + imgSrc
             + '"></a></li>'
