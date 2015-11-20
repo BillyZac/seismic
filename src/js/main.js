@@ -38,6 +38,7 @@ function connect(url) {
       // Timestamp the quakesCollection
       quakesCollection.timeCollected = new Date()
       var quakes = data.features
+      console.log(quakes)
       console.log('quakes', quakes.length)
       for (var i=0; i<quakes.length; i++) {
         var title = quakes[i].properties.title
@@ -45,10 +46,10 @@ function connect(url) {
         var dataPoint = {
           latitude: quakes[i].geometry.coordinates[1],
           longitude: quakes[i].geometry.coordinates[0],
-          radius: quakes[i].properties.sig * 0.07,
+          radius: quakes[i].properties.sig * 0.03,
           mag: quakes[i].properties.mag,
           place: quakes[i].properties.place,
-          time: quakes[i].properties.time
+          time: new Date(quakes[i].properties.time)
         }
         // Convert map coordinates to screen coordinates
         dataPoint.x =  Math.floor(convertLongitude(dataPoint.longitude))
@@ -80,7 +81,7 @@ function connect(url) {
         $('.notifications').text('Data collected at ' + quakesCollection.timeCollected.toLocaleString())
       }
       // Set the maximum magnitude of quakes to draw
-      var maxMagnitude = 5.5
+      var maxMagnitude = 3
       // Draw all quakes above the specified magnitude
       render.drawAll(quakesCollection, maxMagnitude)
 
@@ -91,13 +92,13 @@ function connect(url) {
         $place = $(this).attr('data-place')
         $('.place').text($place)
         $time = $(this).attr('data-time')
-        var friendlyTime = $time
-        $('.time').text(friendlyTime)
+        $('.date').text( new Date($time).toLocaleDateString())
+        $('.time').text( new Date($time).toLocaleTimeString())
       })
 
       $('circle').click(function() {
         // When circle is clicked, show photos
-        photos.photos($(this).attr('data-time'))
+        photos.photos(-40, 120)
 
       })
 

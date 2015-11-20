@@ -31,6 +31,5 @@ function drawCircle(dataPoint) {
   // console.log(dataPoint)
 }
 
-
 module.exports.drawAll = drawAll
 module.exports.drawCircle = drawCircle

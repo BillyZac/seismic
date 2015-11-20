@@ -26,26 +26,11 @@ header {
   }
 }
 
-h3 {
-  padding: 0;
-  padding-top: 10px;
-  margin: 0;
-}
-p {
-  padding: 0;
-  padding-top: 5px;
-  margin: 0;
-}
-
-
-
 main {
   width: 100%;
   position: fixed;
   top: 0;
   left: 250px;
-
-
 }
 
 .info {
@@ -65,8 +50,19 @@ main {
     font-weight: 200;
     letter-spacing: 0.05rem;
   }
+  h3 {
+    padding: 0;
+    margin: 0;
+    padding-top: 30px;
+  }
   p {
     height: 50px;
+    padding: 0;
+    padding-top: 5px;
+    margin: 0;
+  }
+  .date {
+    height: 17px;
   }
 }
 
