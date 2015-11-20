@@ -62,6 +62,7 @@ function connect(url) {
       console.log('Could not connect to USGS.')
       if (localStorage.getItem('quakesCollection')) {
         quakesCollection = JSON.parse(localStorage.getItem('quakesCollection'))
+        console.log(quakesCollection)
       }
     })
     .always(function(APIresponse) {
@@ -88,6 +89,9 @@ function connect(url) {
         $('.mag').text($mag)
         $place = $(this).attr('data-place')
         $('.place').text($place)
+        $time = $(this).attr('data-time')
+        var friendlyTime = $time
+        $('.time').text(friendlyTime)
       })
     })
 }

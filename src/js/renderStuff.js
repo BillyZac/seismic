@@ -26,6 +26,7 @@ function drawCircle(dataPoint) {
     .attr('data-type', 'point')
     .attr('data-mag', dataPoint.mag)
     .attr('data-place', dataPoint.place)
+    .attr('data-time', dataPoint.time)
     .appendTo($svg)
   // console.log(dataPoint)
 }
