@@ -12,6 +12,8 @@ function sanityCheck(a, b) {
 }
 sanityCheck(1,2)
 
+$('header').hide()
+
 var url = 'http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson'
   + '&minmagnitude=3' // This filters out about 90% of the events, which are not useful for this visualization anyway
   + '&orderby=time-asc' // Allows us to easily animate the display
@@ -98,6 +100,16 @@ function connect(url) {
     })
 }
 connect(url)
+
+$('body').mousemove(function(event) {
+  console.log(event.pageY)
+  if (event.pageY < 20) {
+    $('header').slideDown(50)
+  }
+  if (event.pageY > 70) {
+    $('header').slideUp(50)
+  }
+})
 
 function convertLongitude(longitude) {
   var x = ( longitude + 180 ) * ( mapWidth / 360 )
