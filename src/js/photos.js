@@ -28,10 +28,13 @@ function photos(latitude, longitude) {
             + '_'
             + photo.secret
             + '.jpg'
-          photoHTML += '<li>'
+
+          photoHTML += '<li><a href="'
+            + '#'
+            + '/>'
             + '<img src="'
             + imgSrc
-            + '"></li>'
+            + '"></a></li>'
         })
         photoHTML += '</ul>'
         $('.photos').html(photoHTML)
