@@ -5,12 +5,12 @@ body {
   background: #000; }
 
 header {
-  background: rgba(51, 51, 51, 0.8);
+  background: rgba(33, 44, 44, 0.8);
   color: white;
-  height: 55px;
   width: 100%;
   position: fixed;
-  top: 0; }
+  top: 0;
+  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75); }
   header h1 {
     padding: 10px;
     margin: 0;
@@ -21,65 +21,51 @@ header {
   header .logo {
     height: 40px;
     padding-left: 10px;
-    padding-top: 5px; }
+    padding-top: 10px; }
 
 main {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 250px; }
+  display: flex; }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 15rem;
+  padding: 70px 10px;
   background-color: #333;
-  color: white;
-  left: 0;
-  top: 0;
-  position: fixed;
-  width: 240px;
-  padding-left: 10px;
-  padding-top: 40px;
-  height: 555px;
-  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75); }
+  color: white; }
   .info h3 {
     border-bottom: 1px solid #293838;
     color: #B9F9F9;
     text-transform: uppercase;
     font-weight: 200;
-    letter-spacing: 0.05rem; }
-  .info h3 {
+    letter-spacing: 0.05rem;
     padding: 0;
-    margin: 0;
-    padding-top: 30px; }
+    margin: 0; }
   .info p {
-    height: 37px;
+    flex-basis: 3rem;
     padding: 0;
-    padding-top: 5px;
     margin: 0; }
   .info .date {
-    height: 17px; }
+    flex-basis: auto; }
   .info .time {
     font-size: 0.8rem;
-    color: #ccc;
-    height: 12px; }
+    color: #ccc; }
 
 .map {
-  width: 1190px;
   height: 595px;
+  flex-grow: 1;
   background-image: url(../images/global-map.png);
   background-repeat: no-repeat;
   background-size: cover; }
 
 circle {
   transition: fill 0.2s ease; }
-
-circle:hover {
-  fill: tomato; }
+  circle:hover {
+    fill: tomato; }
 
 .notifications {
   font-size: 0.7rem;
-  color: #888;
-  bottom: 5px;
-  position: absolute; }
+  color: #888; }
 
 .photos img {
   width: 65px;
