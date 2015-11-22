@@ -5,7 +5,7 @@ function photos(latitude, longitude) {
   console.log(latitude, longitude)
     var flickerAPI = 'https://api.flickr.com/services/rest/'
       + '?method=flickr.photos.search'
-      + '&api_key=439d3c788d4c522138a62a1a9faf2f10'
+      + '&api_key=5081165f9d3be02a2f2c42e80e7b449a'
       // + '&tags=earthquake%2C+earthquakes'
       + '&sort=interestingness-desc'
       + '&media=photos'
