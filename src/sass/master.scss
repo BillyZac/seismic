@@ -6,19 +6,13 @@ body {
   background: #000;
 }
 
-body * {
-  // outline: 1px dotted pink;
-}
-
 header {
   background: hsla(180, 15%, 15%, 0.8);
   color: white;
-  // height: 55px;
   width: 100%;
   position: fixed;
   top: 0;
   box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75);
-
   h1 {
     padding: 10px;
     margin: 0;
@@ -26,14 +20,12 @@ header {
     text-transform: lowercase;
     letter-spacing: 0.3rem;
     font-weight: 100;
-
   }
-    .logo {
-      height: 40px;
-      padding-left: 10px;
-      padding-top: 10px;
-    }
-
+  .logo {
+    height: 40px;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
 }
 
 main {
@@ -47,8 +39,6 @@ main {
   padding: 70px 10px;
   background-color: #333;
   color: white;
-
-
   h3 {
     border-bottom: 1px solid #293838;
     color: #B9F9F9;
@@ -57,29 +47,23 @@ main {
     letter-spacing: 0.05rem;
     padding: 0;
     margin: 0;
-    // padding-top: 30px;
   }
   p {
     flex-basis: 3rem;
-    // height: 37px; /* Fixed height so items below don't move when Place takes two lines accomodate */
     padding: 0;
-    // padding-top: 5px;
     margin: 0;
   }
   .date {
     flex-basis: auto;
-    // height: 17px;
   }
   .time {
     font-size: 0.8rem;
     color: #ccc;
-    // height: 12px;
   }
 }
 
 .map {
   height: 595px;
-  // width: 100%;
   flex-grow: 1;
   background-image: url(../images/global-map.png);
   background-repeat: no-repeat;
@@ -88,23 +72,18 @@ main {
 
 circle {
   transition: fill 0.2s ease;
-}
-circle:hover {
-  fill: tomato;
+  &:hover {
+    fill: tomato;
+  }
 }
 
 .notifications {
   font-size: 0.7rem;
   color: #888;
-  // bottom: 5px;
-  // position: absolute;
-  // align-self: flex-end;
 }
 
 .photos {
-  // border: 1px dashed tomato;
   img {
-    // background-color: #222;
     width: 65px;
     height: 65px;
     padding: 3px;
