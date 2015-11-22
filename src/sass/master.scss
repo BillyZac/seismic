@@ -6,13 +6,18 @@ body {
   background: #000;
 }
 
+body * {
+  // outline: 1px dotted pink;
+}
+
 header {
-  background: hsla(0, 0%, 20%, 0.8);
+  background: hsla(180, 15%, 15%, 0.8);
   color: white;
-  height: 55px;
+  // height: 55px;
   width: 100%;
   position: fixed;
   top: 0;
+  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75);
 
   h1 {
     padding: 10px;
@@ -26,31 +31,23 @@ header {
     .logo {
       height: 40px;
       padding-left: 10px;
-      padding-top: 5px;
+      padding-top: 10px;
     }
 
 }
 
-
-
 main {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 250px;
+  display: flex;
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 15rem;
+  padding: 70px 10px;
   background-color: #333;
   color: white;
-  left: 0;
-  top: 0;
-  position: fixed;
-  width: 240px;
-  padding-left: 10px;
-  padding-top: 40px;
-  height: 555px;
-  box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.75);
+
 
   h3 {
     border-bottom: 1px solid #293838;
@@ -58,31 +55,32 @@ main {
     text-transform: uppercase;
     font-weight: 200;
     letter-spacing: 0.05rem;
-  }
-  h3 {
     padding: 0;
     margin: 0;
-    padding-top: 30px;
+    // padding-top: 30px;
   }
   p {
-    height: 37px;
+    flex-basis: 3rem;
+    // height: 37px; /* Fixed height so items below don't move when Place takes two lines accomodate */
     padding: 0;
-    padding-top: 5px;
+    // padding-top: 5px;
     margin: 0;
   }
   .date {
-    height: 17px;
+    flex-basis: auto;
+    // height: 17px;
   }
   .time {
     font-size: 0.8rem;
     color: #ccc;
-    height: 12px;
+    // height: 12px;
   }
 }
 
 .map {
-  width: 1190px;
   height: 595px;
+  // width: 100%;
+  flex-grow: 1;
   background-image: url(../images/global-map.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -98,8 +96,9 @@ circle:hover {
 .notifications {
   font-size: 0.7rem;
   color: #888;
-  bottom: 5px;
-  position: absolute;
+  // bottom: 5px;
+  // position: absolute;
+  // align-self: flex-end;
 }
 
 .photos {
