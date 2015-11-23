@@ -6,10 +6,19 @@ Pulls earthquake data from the U.S. Geological Survey and creates a map of recen
 
 ## Installing
 After cloning, run:	
-    npm install
+
+'''
+npm install
+'''
 
 Then:
-    gulp watch
+
+'''
+gulp watch
+'''
 
 And, in a new terminal tab:
-    gulp browser-sync
+
+'''
+gulp browser-sync
+'''
