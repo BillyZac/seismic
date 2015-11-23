@@ -17,7 +17,7 @@ Then:
 
 Create a file in the root of the project called "api-key.js", in that file, put your Flickr api key like this:
 ```
-module.exports = "ebb9e5fe1a05ae6489632b7abafbe2bb";
+module.exports = "blahblah blah blah my key";
 ```
 
 ```
