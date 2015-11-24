@@ -1,11 +1,11 @@
 var $ = require('jquery')
-
+var key = require('../../api-key');
 function photos(latitude, longitude) {
   // get photos associated with the latitude and longitude
   console.log(latitude, longitude)
     var flickerAPI = 'https://api.flickr.com/services/rest/'
       + '?method=flickr.photos.search'
-      + '&api_key=5081165f9d3be02a2f2c42e80e7b449a'
+      + '&api_key=' + key
       // + '&tags=earthquake%2C+earthquakes'
       + '&sort=interestingness-desc'
       + '&media=photos'
