@@ -30,13 +30,13 @@ header {
 
 main {
   display: flex;
+  flex-direction: column;
 }
-
 .info {
   display: flex;
   flex-direction: column;
   flex-basis: 15rem;
-  padding: 70px 10px;
+  padding: 20px 10px;
   background-color: #333;
   color: white;
   h3 {
@@ -49,12 +49,14 @@ main {
     margin: 0;
   }
   p {
-    flex-basis: 3rem;
+    // flex-basis: 3rem;
     padding: 0;
     margin: 0;
+    margin-bottom: 1rem;
   }
   .date {
     flex-basis: auto;
+    margin-bottom: 0.3rem;
   }
   .time {
     font-size: 0.8rem;
@@ -64,7 +66,7 @@ main {
 
 .map {
   height: 595px;
-  flex-grow: 1;
+  // flex-grow: 1;
   background-image: url(../images/global-map.png);
   background-repeat: no-repeat;
   background-size: cover;
