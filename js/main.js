@@ -117,10 +117,10 @@
 	      // Show notification if cannot connect to API
 	      if (APIresponse.statusText === 'error') {
 	        if (quakesCollection.timeCollected === 'never') {
-	          $('.notifications').text('Could not connect to USGS.')
+	          $('.notifications').text('We\'re sorry, but we could not connect to the USGS at this time. Please try again in a moment.')
 	        } else {
 	          var cachedTimeCollected = new Date(quakesCollection.timeCollected)
-	          $('.notifications').text('Could not connect to USGS. Data last collected at '
+	          $('.notifications').text('We could not connect to USGS at this time, so we\'re displaying data that was stored on your most recent visit. Data last collected at '
 	          + cachedTimeCollected.toLocaleString())
 	        }
 	      } else {
